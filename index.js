@@ -26,14 +26,14 @@ mongoClient.connect((err)=>{
     todoList.createIndex({id: 1},{unique: 1})
 })
 */
-
+/*
 mongoose.connect(mongoDbUrl + '/todoRepo', { useNewUrlParser: true })
 mongoose.connection.once('open', ()=>{
     console.log('Mongoose connection established.')
 }).on('error', ()=>{
     console.log('MongoDb connection error')
 })
-
+*/
 app.use(cors())
 app.use(express.json())
 
