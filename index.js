@@ -48,6 +48,12 @@ app.get('/api/getList', (req,res) => {
     console.log('Sent list of items');
 });
 
+// Handles any requests that don't match the ones above
+app.get('/', (req,res) =>{
+    res.send("Welcome to Rayans Express Server service");
+});
+
+
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, '../my-react-app/build')));
 
