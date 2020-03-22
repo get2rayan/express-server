@@ -10,3 +10,8 @@ exports.createTodo=async(req, res)=>{
     await todo.save()    
     res.send({ todo })
 }
+
+exports.deleteTodo=async(req, res)=>{    
+    await Todo.findByIdAndDelete(req.query.id)
+    res.sendStatus(200)
+}

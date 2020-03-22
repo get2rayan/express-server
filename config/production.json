@@ -1,0 +1,5 @@
+{
+    "db":{
+        "url":"mongodb://rayans-cosmos-account:7TcHzPd1FHy1PZzG4pN2c20pVpglNeQhgytMDkCw22I3zVUQNL9Z5je7FLaxsFN0xjDs8prcNB7YtiZZPa1lNQ==@rayans-cosmos-account.mongo.cosmos.azure.com:10255/?ssl=true&appName=@rayans-cosmos-account@"
+    }
+}

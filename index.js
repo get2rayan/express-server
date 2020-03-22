@@ -1,17 +1,20 @@
 const express = require('express')
 const app = express()
+const config=require('config')
+//const router=express.Router
 const path=require('path')
 const cors = require('cors')
-const MongoClient = require('mongodb').MongoClient
+//const MongoClient = require('mongodb').MongoClient
 const mongoose = require('mongoose')
-const Todo = require('./models/Todo')
 const TodoController = require('./controllers/TodoController')
 
-const PORT = 4000
-const mongoDbUrl="mongodb://localhost:27017"
-const mongoDbName="TodoRepo"
+console.log('NODE_ENV is : ' + config.util.getEnv('NODE_ENV'))
+const PORT = config.get('app.port')
+const mongoDbUrl=config.get('db.url')
+const mongoDbName=config.get('db.repoName')
 
 //MongoDB connection
+//#region MongoClient
 /*
 const mongoClient=new MongoClient(mongoDbUrl)
 mongoClient.connect((err)=>{
@@ -26,23 +29,24 @@ mongoClient.connect((err)=>{
     todoList.createIndex({id: 1},{unique: 1})
 })
 */
-/*
+//#endregion
 mongoose.connect(mongoDbUrl + '/todoRepo', { useNewUrlParser: true })
 mongoose.connection.once('open', ()=>{
     console.log('Mongoose connection established.')
 }).on('error', ()=>{
     console.log('MongoDb connection error')
 })
-*/
+
 app.use(cors())
 app.use(express.json())
 
 // Mongo Test
 app.get('/api/todos', TodoController.getTodos)
 app.post('/api/todos', TodoController.createTodo)
+app.delete('/api/todos', TodoController.deleteTodo)
 
 // An api endpoint that returns a short list of items
-app.get('/api/getList', (req,res) => {
+app.get('/api/list', (req,res) => {
     var list = ["item1", "item2", "item3"];
     res.json(list);
     console.log('Sent list of items');
@@ -52,7 +56,6 @@ app.get('/api/getList', (req,res) => {
 app.get('/', (req,res) =>{
     res.send("Welcome to Rayans Express Server service");
 });
-
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, '../my-react-app/build')));
