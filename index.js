@@ -37,13 +37,20 @@ mongoose.connection.once('open', ()=>{
     console.log('MongoDb connection error')
 })
 
+console.log('MongoDB Url : ' + mongoDbUrl)
 app.use(cors())
 app.use(express.json())
 
-// Mongo Test
-app.get('/api/todos', TodoController.getTodos)
+// Mongo API methods
+/*app.get('/api/todos', TodoController.getTodos)
 app.post('/api/todos', TodoController.createTodo)
 app.delete('/api/todos', TodoController.deleteTodo)
+*/
+app.route('/api/todos')
+    .get(TodoController.getTodos)
+    .post(TodoController.createTodo)
+    .delete(TodoController.deleteTodo)
+    .put(TodoController.putTodo)
 
 // An api endpoint that returns a short list of items
 app.get('/api/list', (req,res) => {
