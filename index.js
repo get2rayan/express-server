@@ -30,7 +30,7 @@ mongoClient.connect((err)=>{
 })
 */
 //#endregion
-mongoose.connect(mongoDbUrl + '/todoRepo', { useNewUrlParser: true })
+mongoose.connect(mongoDbUrl + '/todoRepo', { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.connection.once('open', ()=>{
     console.log('Mongoose connection established.')
 }).on('error', ()=>{
@@ -55,7 +55,7 @@ app.route('/api/todos')
 // An api endpoint that returns a short list of items
 app.get('/api/list', (req,res) => {
     var list = ["item1", "item2", "item3"];
-    res.json(list);
+    res.status(200).json(list);
     console.log('Sent list of items');
 });
 
